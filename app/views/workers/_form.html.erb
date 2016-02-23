@@ -1,0 +1,37 @@
+<%= form_for(@worker) do |f| %>
+  <% if @worker.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@worker.errors.count, "error") %> prohibited this worker from being saved:</h2>
+
+      <ul>
+      <% @worker.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Фамилия" %><br>
+    <%= f.text_field :fname %>
+  </div>
+  <div class="field">
+    <%= f.label "Имя" %><br>
+    <%= f.text_field :sname %>
+  </div>
+  <div class="field">
+    <%= f.label "Отчество" %><br>
+    <%= f.text_field :tname %>
+  </div>
+  <div class="field">
+    <%= f.label "Дата рождения" %>
+    <%= f.date_select :birthday, :start_year => 1940, :end_year=>Time.now.year-10 %>
+  </div>
+  <div class="field">
+    <%= f.label "ПИН" %><br>
+    <%= f.text_field :pin %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Сохранить изменения"%>
+  </div>
+<% end %>

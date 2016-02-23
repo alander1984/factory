@@ -1,0 +1,33 @@
+<a href="/admin">Вернутья в главное меню</a>
+
+<p id="notice"><%= notice %></p>
+
+<h1 class="formTitle">Операции</h1>
+
+<table class="standard">
+  <thead>
+    <tr>
+      <th class="standard">Название</th>
+      <th class="standard">Индекс особенной группы</th>
+      <th class="standard">Цех</th>
+      <th  class="standard" colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @operations.each do |operation| %>
+      <tr class="standard">
+        <td class="standard"><%= operation.name %></td>
+        <td class="standard"><%= operation.special %></td>
+        <td class="standard"><%= Workshop.find(operation.workshop_id).name %></td>
+        <td class="standard"><%= link_to 'Открыть', operation %></td>
+        <td class="standard"><%= link_to 'Редактировать', edit_operation_path(operation) %></td>
+        <td class="standard"><%= link_to 'Удалить', operation, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Создать операцию', new_operation_path %>

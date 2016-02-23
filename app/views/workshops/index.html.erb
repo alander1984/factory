@@ -1,0 +1,29 @@
+<a href="/admin">Вернутья в главное меню</a>
+
+<p id="notice"><%= notice %></p>
+
+<h1>Цеха</h1>
+
+<table class="standard">
+  <thead>
+    <tr>
+      <th class="standard">Название</th>
+      <th class="standard" colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @workshops.each do |workshop| %>
+      <tr class="standard">
+        <td class="standard"><%= workshop.name %></td>
+        <td class="standard"><%= link_to 'Открыть', workshop %></td>
+        <td class="standard"><%= link_to 'Редактировать', edit_workshop_path(workshop) %></td>
+        <td class="standard"><%= link_to 'Удалить', workshop, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Зарегистрировать цех', new_workshop_path %>

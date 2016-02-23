@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+
+<p>
+  <strong>Идентификатор:</strong>
+  <%= @workshop.id %>
+</p>
+
+
+<p>
+  <strong>Название:</strong>
+  <%= @workshop.name %>
+</p>
+
+<%= link_to 'Редактировать', edit_workshop_path(@workshop) %> |
+<%= link_to 'Назад', workshops_path %>

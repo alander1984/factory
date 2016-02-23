@@ -1,0 +1,6 @@
+if ('<%= @valid %>'=='true') {
+	$('#winfos tbody').html("<%= j render( :partial => 'workers/table_inline', :locals=>{ :winfo => @winfo}) %>");
+}
+else {
+	alert('Введите пожалуйста правильные даты')
+}

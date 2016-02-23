@@ -1,0 +1,39 @@
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Детальная информация: <%= params['sdate'] %> - <%= params['edate'] %></h3>
+    <h3><%= @worker_name %></h3>
+    </div>
+  <div class="modal-body">
+    <div style = "margin-left:15px; margin-right:40px;">
+
+    <table border=1 class="table-bordered table-striped table-condensed cf">
+      <thead>
+        <th>Операция</th>
+        <th>Количество</th>
+        <th>Стоимость</th>
+        <th>Сумма</th>
+      </thead>
+      <tbody>  
+      <% @dayinfo.each do |info| %>
+        <% if !info['detail'].nil? %>
+          <tr><td colspan=4><%= info['day'] %> Сумма: <%= info['amount'] %></td></tr>
+          <% info['detail'].each do |e| %>
+           <tr>
+              <td><%= e['operation_name'] %></td>
+              <td><%= e['cnt'] %></td>
+              <td><%= e['cost'] %></td>
+              <td><%= e['amount'] %></td>
+           </tr> 
+          <% end %>
+        <% end %>  
+      <% end %>
+      </tbody>
+    </table>
+
+    </div>
+  </div>
+</div>
+  <div class="modal-footer">
+     <%= link_to "Скачать", report_getWorkerStatPDF_url(:sdate => params['sdate'], :edate => params['edate'], :worker_id => params['worker_id']), class: "btn btn-primary" %>
+    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true" >Закрыть</button>
+</div>

@@ -1,0 +1,25 @@
+<table class="standard" id="cur_op_costs_table">
+  <thead>
+    <tr>
+      <th class="standard">Стоимость</th>
+      <th class="standard">Дата начала</th>
+      <th class="standard">Дата окончания</th>
+      <% if !only_show %>
+          <th class="standard"></th>
+      <% end %>    
+    </tr>
+  </thead>
+
+  <tbody>
+    <% opc.each do |op_cost| %>
+      <tr class="standard" id="operation_cost_<%= op_cost.id %>">
+        <td class="standard"><%= op_cost.cost %></td>
+        <td class="standard"><%= op_cost.sdate %></td>
+        <td class="standard"><%= op_cost.edate %></td>
+        <% if !only_show %>
+          <td class="standard"><%= link_to 'Удалить', op_cost, method: :delete, data: { confirm: 'Вы уверены?' }, remote: true %></td>
+        <% end %>  
+      </tr>
+    <% end %>
+  </tbody>
+</table>

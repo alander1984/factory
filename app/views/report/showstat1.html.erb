@@ -1,0 +1,106 @@
+<div style = "margin-left:15px; margin-right:15px; margin-bottom:70px">
+<!-- наше модальное окно для выбора -->
+    <div id="modal1" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content" id="mmm" >
+          <div class="modal-header">Детальная информация
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer"></div>
+        </div>
+      </div>
+    </div>
+
+
+<div style="margin-left:40px;margin-right:40px;">
+<h2>Сотрудники (зарплатный табель за период)</h2>
+</br>
+      <%= form_tag({:action => 'refreshStat1'}, :remote => true, :method => 'GET') do %>
+     <div class="form-group row" >
+            <label for="inputStartDate" class="col-md-1 form-control-label">Начало</label>
+            <div class="col-md-2">
+<!-- Извращения с выбором даты, однако -->                
+             <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                              <%= text_field(:startdate, @startdate , class: "form-control datepicker", placeholder: "DD/MM/YYYY", onchange: "document.getElementById('sdate1').value=this.value") %> 
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <!--это для нажатия по иконке -->
+             <script type="text/javascript">
+                 $(function () {
+                     $('#datetimepicker1').datepicker();
+                 });
+              </script>
+              <!--это для нажатия по полю ввода -->
+              <script type="text/javascript">
+                 $(document).ready(function(){
+                     $('.datepicker').datepicker();
+                 });
+              </script>
+<!-- Извращения с выбором даты, однако -->                
+            </div>
+            <label for="inputEndDate" class="col-md-1 form-control-label">конец</label>
+            <div class="col-md-2">
+<!-- Извращения с выбором даты, однако -->                
+             <div class="form-group">
+                <div class='input-group date' id='datetimepicker2'>
+                              <%= text_field(:enddate, @enddate , class: "form-control datepicker", placeholder: "DD/MM/YYYY", onchange: "document.getElementById('edate1').value=this.value") %> 
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <!--это для нажатия по иконке -->
+             <script type="text/javascript">
+                 $(function () {
+                     $('#datetimepicker2').datepicker();
+                 });
+              </script>
+              <!--это для нажатия по полю ввода -->
+              <script type="text/javascript">
+                 $(document).ready(function(){
+                     $('.datepicker').datepicker();
+                 });
+              </script>
+<!-- Извращения с выбором даты, однако -->                
+            </div>
+            <div class ="col-md-2">
+              <button type="submit" class="btn btn-primary" name= "refresh">Показать</button>
+            </div>
+            <% end %> <!-- конец формы -->
+            </div>
+
+
+<table>
+<tr><td>
+<!-- Таблица для данных --> 
+<table class="table-bordered table-striped table-condensed cf"  id="winfos">
+			<thead>
+				<th>#</th>
+				<th>Фамилия</th>
+				<th>Имя</th>
+				<th>Отчество</th>
+        <th>Дата рождения</th>
+				<th>З/п</th>
+			</thead>
+			<tbody>
+				<%= render( :partial => 'workers/table_inline', :locals=>{ :winfo => @winfo}) %>
+			</tbody>
+		</table>
+</td>
+<td valign = 'top'>
+    <div  style = "margin-left:40px;">
+      <%= form_tag({:action => 'stat1'}, :method => 'GET') do %>
+              <%= hidden_field_tag(:sdate1) %>
+              <%= hidden_field_tag(:edate1) %>
+              <button type="submit" class="btn btn-primary" name= "download">Скачать</button>
+      <% end %>        
+    </div>  
+</td>
+<table>
+
+
+</div>

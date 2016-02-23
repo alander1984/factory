@@ -1,0 +1,31 @@
+<%= submit_tag 'Назад',  :type => 'button', 
+  :onclick => 'window.history.go(-1)', :class => "controlbtn_medium" %>
+</br>
+<h1>Данные за <%= @month_name %></h1>
+<h2>Всего операций выполнено: <%= @sum %></h2>
+<table class="standard">
+  <thead>
+    <tr>
+      <th class="standard">Дата</th>
+      <th class="standard">Цех</th>
+      <th class="standard">Операция</th>
+      <th class="standard">Количество</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+<% @worker_stat.each do |ws| %>
+      <tr class="standard">
+        <td class="standard"><%= ws['action_date'] %></td>
+        <td class="standard"><%= ws['workshop_name'] %></td>
+        <td class="standard"><%= ws['operation_name'] %></td>
+        <td class="standard"><%= ws['cnt'] %></td>
+	</tr>
+<% end %>
+</tbody></table>
+
+
+<%= submit_tag 'Назад',  :type => 'button', 
+  :onclick => 'window.history.go(-1)', :class => "controlbtn_medium" %>
+  

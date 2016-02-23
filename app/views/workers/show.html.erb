@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Фамилия:</strong>
+  <%= @worker.fname %>
+</p>
+
+<p>
+  <strong>Имя:</strong>
+  <%= @worker.sname %>
+</p>
+
+<p>
+  <strong>Отчество:</strong>
+  <%= @worker.tname %>
+</p>
+
+<p>
+  <strong>Дата рождения:</strong>
+  <%= @worker.birthday %>
+</p>
+
+<p>
+  <strong>ПИН	:</strong>
+  <%= @worker.pin %>
+</p>
+
+<div class="col-xs-4">
+  <object align="center" width="" height="30" data="data:image/png;base64,<%= @data_base64  %>"></object>
+  <br>
+  <object style="margin-left: 3px"><%= @barcode.to_s %></object>
+</div>
+
+<%= link_to 'Редактировать', edit_worker_path(@worker) %> |
+<%= link_to 'Назад', workers_path %>

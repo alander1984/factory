@@ -1,0 +1,17 @@
+<%= form_for @operation_cost, :remote => true do |f| %>
+<div class="simple">
+  <div class="field">
+  	<%= f.label "Стоимость" %>
+  	<%= f.number_field :cost, step: 0.001%>
+  </div>
+  <div class="field">
+  	<%= f.label "Дата начала" %>
+  	<%= date_select :operation_cost, :sdate %>
+  </div>
+  <div class="field">
+  	<%= f.label "Дата окончания" %>
+  	<%= date_select :operation_cost, :edate %>
+  </div>
+  <%= hidden_field(:operation_cost, :operation_id, :value => params[:operation_id]) %>
+  <%= f.submit "Добавить стоимость" %>
+</div><% end %>

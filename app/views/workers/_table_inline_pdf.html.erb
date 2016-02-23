@@ -1,0 +1,17 @@
+<% if !winfo.nil? %>
+<% winfo.each_with_index do |w,index| %>
+<tr style="border: 1px solid black;">
+	<td style="border: 1px solid black;"><%= index+1 %></td>
+	<td style="border: 1px solid black;"><%= w['fname'] %></td>
+	<td style="border: 1px solid black;"><%= w['sname'] %></td>
+	<td style="border: 1px solid black;"><%= w['tname'] %></td>
+	<td style="border: 1px solid black;"><%= w['birthday'] %></td>
+
+		<td style="border: 1px solid black;"> <%= w['amount'] %></td>
+</tr>
+<% end %>
+<% else %>
+	<tr style="border: 1px solid black;">
+		<td colspan=6 style="border: 1px solid black;">За указанный период данные отсутствуют. Измените период</td>
+	</tr>
+<% end %>

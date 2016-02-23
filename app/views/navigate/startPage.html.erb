@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ввод персональной информации</title>
+    <SCRIPT type="text/javascript" src="vatmpad.js"></SCRIPT>
+    <SCRIPT>
+
+        // Minimal callback function:
+        function keyb_callback(ch)
+        {
+        	switch (toggler)
+        	{
+        		case 1:
+		            var text =
+        		        document.getElementById("barcode_input"), val = text.value;
+        		    break;
+        		case 2: 
+		            var text =
+        		        document.getElementById("pin_input"), val = text.value;
+        		    break;
+        		
+        	}
+
+            switch(ch)
+            {
+                case "BackSpace":
+                var min=(val.charCodeAt(val.length - 1) == 10) ? 2 : 1;
+                text.value = val.substr(0, val.length - min);
+                break;
+
+               case "Enter":
+                   document.forms["input_form"].submit();
+                   break;
+
+               default:
+                   text.value += ch;
+            }
+        }
+
+        </SCRIPT>
+   </head>
+<body onload="vkb = new VATMpad('keyboard', keyb_callback, '', '72px', '#000', '#FFF', '#FFF', '#777', true, '#CC3300', '#FF9966', '#CC3300', true, true); shown=true; document.getElementById('barcode_input').focus(); document.getElementById('keyboard').style.left= '50%'; toggler=1; document.getElementById('pin_input').style.backgroundColor='lightgray';">                           
+    <div class="centered">
+    <h1>Просканируйте пожалуйста штрих-код или введите его в ручном режиме</h1>
+    <br>
+    <form id="input_form" action="sprav/chooseOrg" method="get">
+    	<table align="center"><tr><td>
+    	<div id="barinput">
+    		<h1>Штрих-код =><%= password_field_tag(:barcode_input, "", :onclick=>"toggler=1; document.getElementById('pin_input').style.backgroundColor='lightgray'; document.getElementById('barcode_input').style.backgroundColor='white'") %></h1>
+		</div></td><td rowspan="2">
+			<%= submit_tag 'Стереть',  :type => 'button', :onclick => 'document.getElementById("barcode_input").value=""; document.getElementById("barcode_input").focus();', :class => "controlbtn_medium" %><%= submit_tag 'Далее>>',  :type => 'button', :onclick => 'document.forms["input_form"].submit();', :class => "controlbtn_medium" %>
+		</td></tr>
+        <!--
+         Скрываем ПИН 
+    	<tr><td align="right"><div id="pininput">
+    		<h1>ПИН =><%= password_field_tag(:pin_input, "", :onclick=>"toggler=2; document.getElementById('pin_input').style.backgroundColor='white'; document.getElementById('barcode_input').style.backgroundColor='lightgray'") %></h1>
+		</div></td></tr> 
+        //-->
+		<tr></tr>	
+		</table>
+		</div></div>	
+	</div>
+	<!--Хитрое центрирование с помощью дополнительного div-->
+	<div id="dop_block" style="position: relative; float: right; right: 50%;">
+	<div id="keyboard"></div>
+	</div>
+</body>
+</html>

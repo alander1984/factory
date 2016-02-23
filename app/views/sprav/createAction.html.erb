@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>Ввод персональной информации</title>
+    <SCRIPT type="text/javascript" src="../vatmpad.js"></SCRIPT>
+<script type="text/JavaScript">
+<!--
+var url = document.location.toString() ; //url
+	var e_url = '' ; //edited url
+	var p = 0 ; //position
+	var p2 = 0 ;//position 2
+	p = url.indexOf("//") ;
+	e_url = url.substring(p+2) ;
+	p2 = e_url.indexOf("/") ;
+	var root_url = url.substring(0,p+p2+3);
+setTimeout("location.href = '"+root_url+"'",30000);
+-->
+</script>
+
+    <SCRIPT>
+
+        // Minimal callback function:
+        function keyb_callback(ch)
+        {
+            var text =
+                document.getElementById("operation_cnt"), val = text.value;
+
+            switch(ch)
+            {
+                case "BackSpace":
+                var min=(val.charCodeAt(val.length - 1) == 10) ? 2 : 1;
+                text.value = val.substr(0, val.length - min);
+                break;
+
+               case "Enter":
+                   document.forms["input_form"].submit();;
+                   break;
+
+               default:
+                   text.value += ch;
+            }
+        }
+
+        </SCRIPT>
+   </head>
+<body onload="vkb = new VATMpad('keyboard', keyb_callback, '', '62px', '#000', '#FFF', '#FFF', '#777', true, '#CC3300', '#FF9966', '#CC3300', true, true); shown=true; document.getElementById('operation_cnt').focus(); document.getElementById('operation_cnt').style.left= '50%';">
+
+
+<table  width="80%%"  table-layout: fixed;>
+	<tr>
+		<td style="text-align: left; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">
+	<%= form_tag({:action => 'chooseOperation', :barcode_input=>@barcode_id, :workshop_id=>@workshop_id, :pin_input=>@pin}) do %>
+	<button type="submit" class="controlbtn">Назад
+		</button>
+	<%end%>
+		</td>
+		<td width="100%%"> 
+	<p class="topMessage" style="text-align: center"> Запись в журнале учета для сотрудника:</p><br />
+	<p class="topMessage" style="text-align: center"><%= @worker_name%></p></br>
+		</td>
+	</tr>
+</table>				
+	</br>
+	<p class="topMessage">за <%=Date.current.to_s%> по выполнению операции <%=@operation_name%></p></br>
+	 <div id="operationCntDiv" class="centered">  
+	 <div>
+	 <%= form_tag({:action => 'registerAction', :workshop_id=>@workshop_id, :barcode_input=>@barcode_id, :oper_id=>@operation_id, :pin_input=>@pin }) do %>	
+<!-- наше модальное окно для выбора второй операции и сотрудника -->
+		<div id="modal1" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content" id="mmm" >
+					<div class="modal-header">Выберите операцию</div>
+					<div class="modal-body"></div>
+					<div class="modal-footer"></div>
+				</div>
+			</div>
+		</div>
+
+	<div id="spec_op_select">
+	<% if @operation.special==1 %>
+	<table width="100%%">
+	<tr>
+	<td align="center" valign="center">
+	<h2><span id="modalOperationName1" class="label label-primary">---------</span>
+    <span id="modalWorkerName1" class="label label-primary">---------</span>
+</h2>
+	</td>
+	<td align="left" valign="center">
+				<%= link_to 'Выбрать связанную операцию', sprav_chooseLinkedOperation_path(:operation_id => @operation.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal1', :class => "controlbtn_medium"}   %>
+	</td>
+	</tr>
+	</table>
+	<% end %>
+	</div> 
+	<hr>
+	<table>
+		 <tr>
+		 	<td>
+		 <%= text_field_tag(:operation_cnt) %>
+		 </td>
+		 <td>
+		 <%= submit_tag 'Очистить',  :type => 'button', :onclick => 'document.getElementById("operation_cnt").value=""; document.getElementById("modalOperationName1").innerHTML="---------"; document.getElementById("modalWorkerName1").innerHTML="---------"; ; document.getElementById("linkedoperation_id").value="" ; document.getElementById("linkedworker_id").value=""', :class => "controlbtn_small" %>
+	 	<button type="submit" class="controlbtn">Записать в журнал</button>
+	 	</td>
+		 </tr>
+	 </table>	
+	 <%end%>	                          
+	<div id="dop_block" style="position: relative; float: right; right: 50%;">
+	<div id="keyboard"></div>
+	</div>
+
+</body>
+</html>

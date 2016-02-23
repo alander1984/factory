@@ -1,0 +1,6 @@
+$('#new_cost_link').show();
+$('#new_operation_cost').remove();
+$('#cur_operation_costs').remove();
+$('#new_cost_link').after("<%= j render(:partial => 'cur_operation_cost', 
+:locals => {:only_show => false, 
+	:opc => OperationCost.where('operation_id = :op_id', {op_id: @operation_id})}) %>");

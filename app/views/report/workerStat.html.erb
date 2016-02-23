@@ -1,0 +1,26 @@
+<h3 id="myModalLabel">Расчет за период <%= params['sdate'] %> - <%= params['edate'] %></h3>
+    <h3><%= @worker_name %></h3>
+<!-- Таблица для данных --> 
+<table border=1 style="border-collapse: collapse;">
+      <thead>
+        <th style="border: 1px solid black;">Операция</th>
+        <th style="border: 1px solid black;">Количество</th>
+        <th style="border: 1px solid black;">Стоимость</th>
+        <th style="border: 1px solid black;">Сумма</th>
+      </thead>
+      <tbody>  
+      <% @dayinfo.each do |info| %>
+        <% if !info['detail'].nil? %>
+          <tr style="border: 1px solid black;"><td style="border: 1px solid black;" colspan=4><%= info['day'] %> Сумма: <%= info['amount'] %></td></tr>
+          <% info['detail'].each do |e| %>
+           <tr style="border: 1px solid black;">
+              <td style="border: 1px solid black;"><%= e['operation_name'] %></td>
+              <td style="border: 1px solid black;"><%= e['cnt'] %></td>
+              <td style="border: 1px solid black;"><%= e['cost'] %></td>
+              <td style="border: 1px solid black;"><%= e['amount'] %></td>
+           </tr> 
+          <% end %>
+        <% end %>  
+      <% end %>
+      </tbody>
+    </table>

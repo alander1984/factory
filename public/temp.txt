@@ -1,0 +1,2 @@
+        <%= hidden_field :action, :linkedoperation_id, :id => "lo_id" %>
+        <%= hidden_field :action, :linkedworker_id, :id => "lw_id" %>

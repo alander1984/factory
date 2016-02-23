@@ -1,0 +1,17 @@
+<% if !winfo.nil? %>
+<% winfo.each_with_index do |w,index| %>
+<tr>
+	<td><%= index+1 %></td>
+	<td><%= w['fname'] %></td>
+	<td><%= w['sname'] %></td>
+	<td><%= w['tname'] %></td>
+	<td><%= w['birthday'] %></td>
+
+		<td> <%= link_to modalWorkerStat_url(:sdate => @sdate, :edate => @edate, :worker_id => w['id']), class: "btn btn-default", remote: true, :data => {:toggle=>"modal", :target => '#modal1'} do %><%= w['amount'] %><% end %></td>
+</tr>
+<% end %>
+<% else %>
+	<tr>
+		<td colspan=6>За указанный период данные отсутствуют. Измените период</td>
+	</tr>
+<% end %>

@@ -1,0 +1,196 @@
+<script type="text/JavaScript">
+<!--
+var url = document.location.toString() ; //url
+	var e_url = '' ; //edited url
+	var p = 0 ; //position
+	var p2 = 0 ;//position 2
+	p = url.indexOf("//") ;
+	e_url = url.substring(p+2) ;
+	p2 = e_url.indexOf("/") ;
+	var root_url = url.substring(0,p+p2+3);
+setTimeout("location.href = '"+root_url+"'",20000);
+-->
+</script>
+
+<table width="100%%"> <!--основная таблица-->
+<tr>
+	<td valign= "top">	
+<div style="margin-left:15px; margin-right:15px; margin-top:40px">
+<table>
+	<tr>
+		<td>
+      <!--<%= link_to 'Назад', navigate_startPage_url, :class => "controlbtn_medium"   %>-->
+			<%= form_tag({:action => 'startPage', :controller=>'navigate'}) do %>
+				<button type="submit" class="controlbtn">Назад</button>
+			<%end%>
+		</td>
+		<td> 
+			<p class="topMessage"> Добрый день, <%= @worker_name%></p>
+		</td>
+	</tr>
+</table>
+</div>
+</td><td width="300px">
+	<h1 class="main" align="center">Получить распечатку</h1><br/>
+</td>
+				
+	<tr><td valign="top">	
+<% if @workshops.size>0%>
+<div class="centered">
+	<form>
+		<h1 class="main">Выберите цех</h1>
+	</form>
+</div>	
+<%else%>
+	
+<%end%> 
+<div style="margin-left:15px; margin-right:15px">
+<table width="100%%">
+ 
+<% @workshops.each do |workshop| %>
+  <tr height="100px">
+  	<td>
+  		<div class="centered">
+			<%= form_tag({:action => 'chooseOperation', :workshop_id => workshop.id, :barcode_input=>@barcode_id, :pin_input=>@pin}) do %>
+    			<button type="submit" class="cellBut"><%= workshop.name %>
+				</button>
+			<% end %>
+		</div>
+    </td>
+  </tr>
+<% end %>
+</table>
+</div>
+</td>
+<td><!--для месяцев-->
+  <% if @worker_found %>
+  <div style="margin-left:15px;margin-right:15px">
+  <table>
+    <tr height="70px" align="center"><td><%= link_to 'Сегодня', sprav_Print_url(:barcode_input=>@barcode_id, :pin_input=>@pin, :act=>'today', :worker_id=>@worker_id), :class => "controlbtn_medium"   %></td></tr>
+    <tr height="70px" align="center"><td><%= link_to 'Вчера', sprav_Print_url(:barcode_input=>@barcode_id, :pin_input=>@pin, :act=>'yesterday', :worker_id=>@worker_id), :class => "controlbtn_medium"   %></td></tr>
+    <tr height="70px" align="center"><td><%= link_to 'Эта неделя', sprav_Print_url(:barcode_input=>@barcode_id, :pin_input=>@pin, :act=>'thisweek', :worker_id=>@worker_id), :class => "controlbtn_medium"   %></td></tr>
+    <tr height="70px" align="center"><td><%= link_to 'Прошлая неделя', sprav_Print_url(:barcode_input=>@barcode_id, :pin_input=>@pin, :act=>'lastweek', :worker_id=>@worker_id), :class => "controlbtn_medium"   %></td></tr>
+    <tr height="70px" align="center"><td><%= link_to 'Этот месяц', sprav_Print_url(:barcode_input=>@barcode_id, :pin_input=>@pin, :act=>'thismonth', :worker_id=>@worker_id), :class => "controlbtn_medium"   %></td></tr>
+    <tr height="70px" align="center"><td><%= link_to 'Прошлый месяц', sprav_Print_url(:barcode_input=>@barcode_id, :pin_input=>@pin, :act=>'lastmonth', :worker_id=>@worker_id), :class => "controlbtn_medium"   %></td></tr>
+    </tr>   
+  </table>     
+  </div>
+  <% end %>
+</td>
+</tr></table> <!--закрываем основную таблицу-->	    
+
+<!--
+<table>
+    <tr>
+      <td><a href=/workers/<%=@worker_id%>/month/01><canvas id='month01' width=150 height=80>Обновите браузер</canvas></a></td>
+      <td><a href=/workers/<%=@worker_id%>/month/02><canvas id='month02' width=150 height=80>Обновите браузер</canvas></a></td>
+    </tr> 
+    <tr>
+      <td><a href=/workers/<%=@worker_id%>/month/03><canvas id='month03' width=150 height=80>Обновите браузер</canvas></a></td>
+      <td><a href=/workers/<%=@worker_id%>/month/04><canvas id='month04' width=150 height=80>Обновите браузер</canvas></a></td>
+    </tr> 
+    <tr>
+      <td><a href=/workers/<%=@worker_id%>/month/05><canvas id='month05' width=150 height=80>Обновите браузер</canvas></a></td>
+      <td><a href=/workers/<%=@worker_id%>/month/06><canvas id='month06' width=150 height=80>Обновите браузер</canvas></a></td>
+    </tr> 
+    <tr>
+      <td><a href=/workers/<%=@worker_id%>/month/07><canvas id='month07' width=150 height=80>Обновите браузер</canvas></a></td>
+      <td><a href=/workers/<%=@worker_id%>/month/08><canvas id='month08' width=150 height=80>Обновите браузер</canvas></a></td>
+    </tr> 
+    <tr>
+      <td><a href=/workers/<%=@worker_id%>/month/09><canvas id='month09' width=150 height=80>Обновите браузер</canvas></a></td>
+      <td><a href=/workers/<%=@worker_id%>/month/10><canvas id='month10' width=150 height=80>Обновите браузер</canvas></a></td>
+    </tr> 
+    <tr>
+      <td><a href=/workers/<%=@worker_id%>/month/11><canvas id='month11' width=150 height=80>Обновите браузер</canvas></a></td>
+      <td><a href=/workers/<%=@worker_id%>/month/12><canvas id='month12' width=150 height=80>Обновите браузер</canvas></a></td>
+    </tr> 
+  
+  </table>  <script> 
+      w=150; h=80;
+      
+      var month01 = document.getElementById("month01"),
+      pic01       = new Image();              // "Создаём" изображение
+      pic01.src    = '/assets/monthes/01.jpg';  // Источник изображения, позаимствовано на хабре
+      pic01.onload = function() {    // Событие onLoad, ждём момента пока загрузится изображение
+       month01.getContext('2d').drawImage(pic01, 0, 0,w, h);  // Рисуем изображение от точки с координатами 0, 0
+      }
+
+      var month02 = document.getElementById("month02"),
+      pic02       = new Image();              // "Создаём" изображение
+      pic02.src    = '/assets/monthes/02.jpg';  // Источник изображения, позаимствовано на хабре
+      pic02.onload = function() {    // Событие onLoad, ждём момента пока загрузится изображение
+       month02.getContext('2d').drawImage(pic02, 0, 0,w, h);  // Рисуем изображение от точки с координатами 0, 0
+      }
+      
+            var month03 = document.getElementById("month03"),
+      pic03       = new Image();              // "Создаём" изображение
+      pic03.src    = '/assets/monthes/03.jpg';  // Источник изображения, позаимствовано на хабре
+      pic03.onload = function() {    // Событие onLoad, ждём момента пока загрузится изображение
+       month03.getContext('2d').drawImage(pic03, 0, 0,w, h);  // Рисуем изображение от точки с координатами 0, 0
+      }
+      
+            var month04 = document.getElementById("month04"),
+      pic04       = new Image();              // "Создаём" изображение
+      pic04.src    = '/assets/monthes/04.jpg';  // Источник изображения, позаимствовано на хабре
+      pic04.onload = function() {    // Событие onLoad, ждём момента пока загрузится изображение
+       month04.getContext('2d').drawImage(pic04, 0, 0,w, h);  // Рисуем изображение от точки с координатами 0, 0
+      }
+      
+            var month05 = document.getElementById("month05"),
+      pic05       = new Image();              // "Создаём" изображение
+      pic05.src    = '/assets/monthes/05.jpg';  // Источник изображения, позаимствовано на хабре
+      pic05.onload = function() {    // Событие onLoad, ждём момента пока загрузится изображение
+       month05.getContext('2d').drawImage(pic05, 0, 0,w, h);  // Рисуем изображение от точки с координатами 0, 0
+      }
+      
+            var month06 = document.getElementById("month06"),
+      pic06       = new Image();              // "Создаём" изображение
+      pic06.src    = '/assets/monthes/06.jpg';  // Источник изображения, позаимствовано на хабре
+      pic06.onload = function() {    // Событие onLoad, ждём момента пока загрузится изображение
+       month06.getContext('2d').drawImage(pic06, 0, 0,w, h);  // Рисуем изображение от точки с координатами 0, 0
+      }
+      
+            var month07 = document.getElementById("month07"),
+      pic07       = new Image();              // "Создаём" изображение
+      pic07.src    = '/assets/monthes/07.jpg';  // Источник изображения, позаимствовано на хабре
+      pic07.onload = function() {    // Событие onLoad, ждём момента пока загрузится изображение
+       month07.getContext('2d').drawImage(pic07, 0, 0,w, h);  // Рисуем изображение от точки с координатами 0, 0
+      }
+      
+            var month08 = document.getElementById("month08"),
+      pic08       = new Image();              // "Создаём" изображение
+      pic08.src    = '/assets/monthes/08.jpg';  // Источник изображения, позаимствовано на хабре
+      pic08.onload = function() {    // Событие onLoad, ждём момента пока загрузится изображение
+       month08.getContext('2d').drawImage(pic08, 0, 0,w, h);  // Рисуем изображение от точки с координатами 0, 0
+      }
+      
+            var month09 = document.getElementById("month09"),
+      pic09       = new Image();              // "Создаём" изображение
+      pic09.src    = '/assets/monthes/09.jpg';  // Источник изображения, позаимствовано на хабре
+      pic09.onload = function() {    // Событие onLoad, ждём момента пока загрузится изображение
+       month09.getContext('2d').drawImage(pic09, 0, 0,w, h);  // Рисуем изображение от точки с координатами 0, 0
+      }
+      
+            var month10 = document.getElementById("month10"),
+      pic10       = new Image();              // "Создаём" изображение
+      pic10.src    = '/assets/monthes/10.jpg';  // Источник изображения, позаимствовано на хабре
+      pic10.onload = function() {    // Событие onLoad, ждём момента пока загрузится изображение
+       month10.getContext('2d').drawImage(pic10, 0, 0,w, h);  // Рисуем изображение от точки с координатами 0, 0
+      }
+      
+            var month11 = document.getElementById("month11"),
+      pic11       = new Image();              // "Создаём" изображение
+      pic11.src    = '/assets/monthes/11.jpg';  // Источник изображения, позаимствовано на хабре
+      pic11.onload = function() {    // Событие onLoad, ждём момента пока загрузится изображение
+       month11.getContext('2d').drawImage(pic11, 0, 0,w, h);  // Рисуем изображение от точки с координатами 0, 0
+      }
+
+            var month12 = document.getElementById("month12"),
+      pic12       = new Image();              // "Создаём" изображение
+      pic12.src    = '/assets/monthes/12.jpg';  // Источник изображения, позаимствовано на хабре
+      pic12.onload = function() {    // Событие onLoad, ждём момента пока загрузится изображение
+       month12.getContext('2d').drawImage(pic12, 0, 0,w, h);  // Рисуем изображение от точки с координатами 0, 0
+      }
+
+</script>-->

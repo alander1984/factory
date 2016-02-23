@@ -1,0 +1,15 @@
+<h2>Сотрудники (зарплатный табель за период)</h2>
+<h2>Период <%= @sdate %> - <%= @edate %></h2>
+<table style="border-collapse: collapse;">
+			<thead>
+				<th style="border: 1px solid black;">#</th>
+				<th style="border: 1px solid black;">Фамилия</th>
+				<th style="border: 1px solid black;">Имя</th>
+				<th style="border: 1px solid black;">Отчество</th>
+        <th style="border: 1px solid black;">Дата рождения</th>
+				<th style="border: 1px solid black;">З/п</th>
+			</thead>
+			<tbody>
+				<%= render( :partial => 'workers/table_inline_pdf', :locals=>{ :winfo => @winfo}) %>
+			</tbody>
+		</table>

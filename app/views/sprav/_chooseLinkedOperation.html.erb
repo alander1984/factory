@@ -1,0 +1,46 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Выберите связанную операцию и сотрудника</h3>
+  </div>
+  <div class="modal-body">
+        <%= hidden_field_tag(:linkedoperation_id) %>
+        <%= hidden_field_tag(:linkedworker_id) %>
+     <table width="100%%">
+    <tr>
+    <td>
+      <!--<h3 id="oper_name">Операции</h2>-->
+      <table width="100%%">
+        <% @avalOps.each do |oper| %>
+          <tr height="100px">
+            <td>
+              <div class="centered">
+                <%= link_to oper.name, sprav_selectLinkedOper_path(:operation_id => oper.id), {:remote => true, :class => "controlbtn_medium"}   %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </td>
+    <td>
+      <!--<h3 id="work_name">Сотрудники</h2>-->
+      <table width="100%%">
+      <% @avalWrks.each do |worker| %>
+        <tr height="100px">
+          <td align="center">
+            
+              <%= link_to worker.fname, sprav_selectLinkedWorker_path(:worker_id => worker.id), {:remote => true, :class => "controlbtn_medium"}   %>
+            
+          </td>
+        </tr>  
+      <% end %>
+      </table>
+    </td>
+    </tr>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <h2><span id="modalOperationName" class="label label-primary">---------</span>
+    <span id="modalWorkerName" class="label label-primary">---------</span>
+    <button class="btn, controlbtn" data-dismiss="modal" aria-hidden="true" >>>Выбрать</button></h2>
+<!--    <button class="btn btn-primary">Выбрать</button>-->
+  </div>

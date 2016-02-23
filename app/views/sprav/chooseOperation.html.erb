@@ -1,0 +1,48 @@
+<script type="text/JavaScript">
+<!--
+var url = document.location.toString() ; //url
+	var e_url = '' ; //edited url
+	var p = 0 ; //position
+	var p2 = 0 ;//position 2
+	p = url.indexOf("//") ;
+	e_url = url.substring(p+2) ;
+	p2 = e_url.indexOf("/") ;
+	var root_url = url.substring(0,p+p2+3);
+setTimeout("location.href = '"+root_url+"'",20000);
+-->
+</script>
+
+<div style="margin-left:15px; margin-right:15px; margin-top:40px">
+<table>
+	<tr>
+		<td>
+			<%= link_to 'Назад', sprav_chooseOrg_url(:barcode_input=>@barcode_id, :pin_input=>@pin), :class => "controlbtn_medium"   %>
+		</td>
+		<td> 
+			<p class="topMessage"> <%= @worker_name%>, в выбранном цехе доступны следующие операции:</p>
+		</td>
+	</tr>
+</table>				
+</div>
+<div class="centered">
+	<form>
+		<h1 class="main">Операция</h1>
+	</form>
+</div>		
+ 
+<table width="100%%">
+ 
+<% @operations.each do |oper| %>
+  <tr height="100px">
+  	<td>
+  		<div class="centered">
+  			<%= form_tag({:action=>'createAction', :operation_id=>oper.id, :barcode_input=>@barcode_id, :workshop_id=>@workshop_id, :pin_input=>@pin}) do%>
+    			<button type="submit" class="cellBut"><%= oper.name %>
+				</button>
+			<%end%>
+		</div>
+    </td>
+  </tr>
+<% end %>
+</table>
+	    

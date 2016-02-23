@@ -1,0 +1,37 @@
+<a href="/admin">Вернутья в главное меню</a>
+
+<p id="notice"><%= notice %></p>
+<h1 class = "formTitle">Сотрудники</h1>
+<%= link_to 'Зарегистрировать сотрудника', new_worker_path %>
+
+<table class="standard">
+  <thead>
+    <tr>
+      <th class="standard">Фамилия</th>
+      <th class="standard">Имя</th>
+      <th class="standard">Отчество</th>
+      <th class="standard">Дата рождения</th>
+      <th class="standard">ПИН</th>
+      <th class="standard" colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @workers.each do |worker| %>
+      <tr class="standard">
+        <td class="standard"><%= worker.fname %></td>
+        <td class="standard"><%= worker.sname %></td>
+        <td class="standard"><%= worker.tname %></td>
+        <td class="standard"><%= worker.birthday %></td>
+        <td class="standard"><%= worker.pin %></td>
+        <td class="standard"><%= link_to 'Открыть', worker %></td>
+        <td class="standard"><%= link_to 'Редактировать', edit_worker_path(worker) %></td>
+        <td class="standard"><%= link_to 'Удалить', worker, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Зарегистрировать сотрудника', new_worker_path %>

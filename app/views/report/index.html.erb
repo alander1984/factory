@@ -1,0 +1,12 @@
+<a href="/admin">Вернутья в главное меню</a>
+</br>
+<li>
+<%= link_to "Зарплатная ведомость", report_showstat1_path, id: "showstat1_action_link" %> 
+</li>
+<li><p>
+  Скачать:
+  <%= link_to "Excel", report_path(format: "xls") %>
+</p></li>
+<% @groupedActions.each do |groupedActions| %>
+	<%= groupedActions %></br>
+<% end %>

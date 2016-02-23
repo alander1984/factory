@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Factory</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<script type="text/javascript">
+  jQuery.ajaxSetup({
+    beforeSend: function (xhr) {
+      xhr.setRequestHeader("Accept", "text/javascript");
+    }
+  });
+</script>
+
+<body>
+
+<%= yield %>
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+</body>
+</html>

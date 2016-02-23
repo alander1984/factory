@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Название:</strong>
+  <%= @operation.name %>
+</p>
+
+<p>
+  <strong>Индекс специальной группы:</strong>
+  <%= @operation.special %>
+</p>
+
+<p>
+  <strong>Цех:</strong>
+  <%= Workshop.find(@operation.workshop_id).name %>
+</p>
+
+  <div id="cur_operation_costs">
+    <%= render( :partial => 'operation_costs/cur_operation_cost', :locals=>{ :opc => @cur_operation_costs, :only_show => true }) %>
+  </div>
+
+
+<%= link_to 'Редактировать', edit_operation_path(@operation) %> |
+<%= link_to 'Назад', operations_path %>

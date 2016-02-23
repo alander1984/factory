@@ -1,0 +1,39 @@
+<!--<%= javascript_include_tag 'jquery', 'application' %> -->
+
+<%= form_for(@operation) do |f| %>
+  <% if @operation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@operation.errors.count, "error") %> prohibited this operation from being saved:</h2>
+
+      <ul>
+      <% @operation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Название" %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label "Индекс особенной группы" %>
+    <%= f.number_field :special %>
+  </div>
+  <div class="field">
+    <%= f.label "Цех" %>
+    <%= collection_select(:operation, :workshop_id, @workshops, :id, :name, {:prompt => false}) %>
+  </div>
+  <% if @operation.persisted? %>
+    <%= link_to "Добавить стоимость", new_operation_cost_path(params: {operation_id: params[:id]}), id: "new_cost_link", remote: true %>
+
+    <div id="cur_operation_costs">
+      <%= render( :partial => 'operation_costs/cur_operation_cost', :locals=>{ :opc => @cur_operation_costs , :only_show => false}) %>
+    </div>
+  <% end %>  
+
+  <div class="actions">
+    <%= f.submit "Сохранить"%>
+  </div>
+<% end %>

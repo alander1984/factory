@@ -1,0 +1,13 @@
+$('#new_cost_link').hide().after('<%= j render("form") %>');
+$('#new_operation_cost').submit(function() {
+	var vals= $(this).serialize();
+	$.ajax({
+        type: "POST",
+        url: $(this).attr('action'), //sumbits it to the given url of the form
+        data: vals,
+        dataType: "script" // you want a difference between normal and ajax-calls, and json is standard
+    }).success(function(script){
+        console.log("success", script);
+    });
+      return false;
+    });

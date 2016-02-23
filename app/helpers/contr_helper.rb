@@ -1,0 +1,2 @@
+module ContrHelper
+end
