@@ -16,8 +16,19 @@
 
 <body>
 
+<% if !['navigate','sprav'].include?(params[:controller]) %>
+<% if user_signed_in? %>
+            <%= current_user.email %>
+          <% end %>  
+        <% if !user_signed_in? %>
+          <%= link_to('Войти', new_user_session_path)  %>
+         <% else %>
+          <%= link_to('Выйти', destroy_user_session_path, :method => :delete) %>
+         <% end %> 
+         <br>
+         <% end %>
+<!--<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>-->
 <%= yield %>
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
 </body>
 </html>

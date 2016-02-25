@@ -1,4 +1,5 @@
 class WorkshopsController < ApplicationController
+ before_filter :authenticate_user!
   before_action :set_workshop, only: [:show, :edit, :update, :destroy]
 
   # GET /workshops

@@ -1,7 +1,7 @@
 class OperationsController < ApplicationController
   before_action :set_operation, only: [:show, :edit, :update, :destroy]
   before_action :set_op_costs, only: [:create]
-
+before_filter :authenticate_user!
   # GET /operations
   # GET /operations.json
   def index

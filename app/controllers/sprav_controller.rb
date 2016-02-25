@@ -1,5 +1,4 @@
 class SpravController < ApplicationController
-
   
   def getWorkerName(barcode)
     qstring='isactive=true and (cast(extract(epoch from birthday) as bigint)+31536000*50)*1000+id+pin='+barcode;

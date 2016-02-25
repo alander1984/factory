@@ -1,5 +1,5 @@
 class ReportController < ApplicationController
-
+before_filter :authenticate_user!
 require 'csv'  
   
   def index
