@@ -3,7 +3,7 @@ class WorkersController < ApplicationController
   require 'barby/barcode/code_128'
   require 'barby/outputter/png_outputter'
   require 'active_support'
-before_filter :authenticate_user!
+before_filter :authenticate_user!#, :except => ["period"]
   
 
   before_action :set_worker, only: [:show, :edit, :update, :destroy, :period]
