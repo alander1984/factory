@@ -12,6 +12,7 @@ class OperationCostsController < ApplicationController
     @operation_id=params[:operation_cost][:operation_id];
     #l = Logger.new(STDOUD);
     #l.info('OPERID   '+@operation_id);
+    OperationCost.where('operation_id = :op_id',{op_id: @operation_id}).update_all(edate: DateTime.now())
   	@operation_cost = OperationCost.new(operation_cost_params);
   	@operation_cost.save;
     #@operation = Operation.where("id = :id",{id: params[:operation_id]});

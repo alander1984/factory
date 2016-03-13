@@ -18,10 +18,10 @@ setTimeout("location.href = '"+root_url+"'",20000);
 <div style="margin-left:15px; margin-right:15px; margin-top:40px">
 <table>
 	<tr>
+    
 		<td>
-      <!--<%= link_to 'Назад', navigate_startPage_url, :class => "controlbtn_medium"   %>-->
 			<%= form_tag({:action => 'startPage', :controller=>'navigate'}) do %>
-				<button type="submit" class="controlbtn">Назад</button>
+				<button type="submit" class="controlbtn">Выход</button>
 			<%end%>
 		</td>
 		<td> 

@@ -8,10 +8,10 @@
   	<%= f.label "Дата начала" %>
   	<%= date_select :operation_cost, :sdate %>
   </div>
-  <div class="field">
+  <!--<div class="field">
   	<%= f.label "Дата окончания" %>
   	<%= date_select :operation_cost, :edate %>
-  </div>
+  </div>-->
   <%= hidden_field(:operation_cost, :operation_id, :value => params[:operation_id]) %>
   <%= f.submit "Добавить стоимость" %>
 </div><% end %>

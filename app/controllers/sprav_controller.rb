@@ -73,7 +73,7 @@ class SpravController < ApplicationController
     action.linkedoperation_id=params['linkedoperation_id'];
     action.linkedworker_id=params['linkedworker_id'];
     #Берем одну запись из стоимостей без всяких алгоритмов
-    oc = OperationCost.where('operation_id = '+params['oper_id']+' and current_date >= sdate AND current_date <= edate').take(1);
+    oc = OperationCost.where('operation_id = '+params['oper_id']+' and current_date >= sdate').order('sdate desc').take(1);
     if oc.size>0
       action.cost=oc[0].cost;
       action.amount=oc[0].cost*action.cnt;

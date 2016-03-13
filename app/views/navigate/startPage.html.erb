@@ -5,6 +5,8 @@
     <SCRIPT type="text/javascript" src="vatmpad.js"></SCRIPT>
     <SCRIPT>
 
+        
+
         // Minimal callback function:
         function keyb_callback(ch)
         {
@@ -39,14 +41,14 @@
 
         </SCRIPT>
    </head>
-<body onload="vkb = new VATMpad('keyboard', keyb_callback, '', '72px', '#000', '#FFF', '#FFF', '#777', true, '#CC3300', '#FF9966', '#CC3300', true, true); shown=true; document.getElementById('barcode_input').focus(); document.getElementById('keyboard').style.left= '50%'; toggler=1; document.getElementById('pin_input').style.backgroundColor='lightgray';">                           
+<body onload="vkb = new VATMpad('keyboard', keyb_callback, '', '72px', '#000', '#FFF', '#FFF', '#777', true, '#CC3300', '#FF9966', '#CC3300', true, true); shown=true; document.getElementById('barcode_input').focus(); document.getElementById('keyboard').style.left= '50%'; toggler=1; document.getElementById('barcode_input').onblur = function() {         setTimeout(document.getElementById('barcode_input').focus(), 2000); };">                           
     <div class="centered">
     <h1>Просканируйте пожалуйста штрих-код или введите его в ручном режиме</h1>
     <br>
     <form id="input_form" action="sprav/chooseOrg" method="get">
     	<table align="center"><tr><td>
     	<div id="barinput">
-    		<h1>Штрих-код =><%= password_field_tag(:barcode_input, "", :onclick=>"toggler=1; document.getElementById('pin_input').style.backgroundColor='lightgray'; document.getElementById('barcode_input').style.backgroundColor='white'") %></h1>
+    		<h1>Штрих-код =><%= password_field_tag(:barcode_input, "", :onclick=>"toggler=1; document.getElementById('barcode_input').style.backgroundColor='white'") %></h1>
 		</div></td><td rowspan="2">
 			<%= submit_tag 'Стереть',  :type => 'button', :onclick => 'document.getElementById("barcode_input").value=""; document.getElementById("barcode_input").focus();', :class => "controlbtn_medium" %><%= submit_tag 'Далее>>',  :type => 'button', :onclick => 'document.forms["input_form"].submit();', :class => "controlbtn_medium" %>
 		</td></tr>

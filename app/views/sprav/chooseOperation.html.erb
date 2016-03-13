@@ -16,10 +16,16 @@ setTimeout("location.href = '"+root_url+"'",20000);
 <table>
 	<tr>
 		<td>
-			<%= link_to 'Назад', sprav_chooseOrg_url(:barcode_input=>@barcode_id, :pin_input=>@pin), :class => "controlbtn_medium"   %>
+			<%= form_tag({:action => 'startPage', :controller=>'navigate'}) do %>
+				<button type="submit" class="controlbtn">Выход</button>
+			<%end%>
 		</td>
+			
 		<td> 
 			<p class="topMessage"> <%= @worker_name%>, в выбранном цехе доступны следующие операции:</p>
+		</td>
+		<td>
+			<%= link_to 'Назад', sprav_chooseOrg_url(:barcode_input=>@barcode_id, :pin_input=>@pin), :class => "controlbtn_medium"   %>
 		</td>
 	</tr>
 </table>				
