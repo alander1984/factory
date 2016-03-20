@@ -43,6 +43,9 @@ GEM
       debug_inspector (>= 0.0.1)
     bootstrap-datepicker-rails (1.5.0)
       railties (>= 3.0)
+    bootstrap-editable-rails (0.0.9)
+      railties (>= 3.1)
+      sass-rails
     bootstrap-sass (3.2.0.2)
       sass (~> 3.2)
     builder (3.2.2)
@@ -122,6 +125,8 @@ GEM
       json (~> 1.4)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
+    rest_in_place (2.5.0)
+      rails (>= 3.1)
     sass (3.4.20)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
@@ -166,6 +171,7 @@ PLATFORMS
 DEPENDENCIES
   barby
   bootstrap-datepicker-rails
+  bootstrap-editable-rails
   bootstrap-sass (~> 3.2.0)
   byebug
   chunky_png
@@ -177,6 +183,7 @@ DEPENDENCIES
   rack-cors
   rails (= 4.2.4)
   responders
+  rest_in_place
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring

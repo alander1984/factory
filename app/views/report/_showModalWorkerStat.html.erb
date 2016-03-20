@@ -19,7 +19,8 @@
           <tr><td colspan=4><%= info['day'] %> Сумма: <%= info['amount'] %></td></tr>
           <% info['detail'].each do |e| %>
            <tr>
-              <td><%= e['operation_name'] %></td>
+              <td><%= link_to modalEditAction_url(:date => e['date'], :operation_id => e['operation_id'], :worker_id => params['worker_id']), remote: true, :data => {:toggle=>"modal", :target => '#modal2', :backdrop => "static"} do %>
+              <%= e['operation_name'] %><% end %></td>
               <td><%= e['cnt'] %></td>
               <td><%= e['cost'] %></td>
               <td><%= e['amount'] %></td>
@@ -34,6 +35,19 @@
   </div>
 </div>
   <div class="modal-footer">
+     <%= link_to "Перечитать данные", report_refreshWorkerStat_url(:sdate => params['sdate'], :edate => params['edate'], :worker_id => params['worker_id']), class: "btn btn-primary", :remote => true %>
      <%= link_to "Скачать", report_getWorkerStatPDF_url(:sdate => params['sdate'], :edate => params['edate'], :worker_id => params['worker_id']), class: "btn btn-primary" %>
     <button class="btn btn-default" data-dismiss="modal" aria-hidden="true" >Закрыть</button>
 </div>
+<div style = "margin-left:15px; margin-right:15px; margin-bottom:70px">
+<!-- наше модальное окно для выбора -->
+    <div id="modal2" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content" id="editmodal" >
+          <div class="modal-header">Редактирование
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer"></div>
+        </div>
+      </div>
+    </div>

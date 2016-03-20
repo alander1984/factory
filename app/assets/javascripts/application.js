@@ -16,6 +16,8 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker
+//= require bootstrap-editable
+//= require bootstrap-editable-rails
 //= require_tree .
 //= require bootstrap/modal
 

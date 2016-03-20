@@ -76,7 +76,7 @@ class SpravController < ApplicationController
     oc = OperationCost.where('operation_id = '+params['oper_id']+' and current_date >= sdate').order('sdate desc').take(1);
     if oc.size>0
       action.cost=oc[0].cost;
-      action.amount=oc[0].cost*action.cnt;
+      action.amount=(oc[0].cost*action.cnt).round(2);
     end;  
     action.save;
     redirect_to :action=>'chooseOperation', :workshop_id=>@workshop_id, :barcode_input=>@barcode_id, :pin_input=>@pin;   

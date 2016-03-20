@@ -7,7 +7,7 @@
 	<td><%= w['tname'] %></td>
 	<td><%= w['birthday'] %></td>
 
-		<td> <%= link_to modalWorkerStat_url(:sdate => @sdate, :edate => @edate, :worker_id => w['id']), class: "btn btn-default", remote: true, :data => {:toggle=>"modal", :target => '#modal1'} do %><%= w['amount'] %><% end %></td>
+		<td> <%= link_to modalWorkerStat_url(:sdate => @sdate, :edate => @edate, :worker_id => w['id']), class: "btn btn-default", remote: true, :data => {:toggle=>"modal", :target => '#modal1', :backdrop => "static"} do %><%= w['amount'] %><% end %></td>
 </tr>
 <% end %>
 <% else %>

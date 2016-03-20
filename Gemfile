@@ -31,6 +31,9 @@ gem 'bootstrap-sass', '~>3.2.0'
 gem 'bootstrap-datepicker-rails'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
+gem 'bootstrap-editable-rails'
+gem 'rest_in_place'
+
 
 
 # Use ActiveModel has_secure_password

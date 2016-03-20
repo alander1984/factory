@@ -41,7 +41,7 @@ require 'csv'
         info = @winfo.select{|info| info['id']==ga.id}.first();
         if !info .nil?
           if info['detail'].nil? 
-            info['amount'] = info['amount']-ga.amount;
+            info['amount'] = (info['amount']-ga.amount).round(2);
           end
         else
           element = Hash.new;
@@ -75,11 +75,11 @@ require 'csv'
       @dayinfo[i]['day']=sdate+i;
     end  
 
-      groupedActions = Action.select('sum(cnt) as cnt, cost, sum(amount) as amount, operations.name, date(actions.created_at)').joins(:operation).
-        group('date(actions.created_at)', 'operations.name', 'cost').
+      groupedActions = Action.select('sum(cnt) as cnt, avg(cost) as cost, sum(amount) as amount, operations.name, date(actions.created_at), operations.id as id').joins(:operation).
+        group('date(actions.created_at)', 'operations.name', 'operations.id').
         where("worker_id=:worker_id and actions.created_at between :start_date and :end_date and coalesce(special,0)<>1" ,
           {worker_id: worker_id, start_date: sdate, end_date: edate}).order('date(actions.created_at)');
-      groupedSpecialActions = Action.select('sum(cnt) as cnt, cost, sum(amount) as amount, operations.name, date(actions.created_at)').joins(:operation).group('date(actions.created_at)', 'operations.name', 'cost').where("linkedworker_id=:worker_id and actions.created_at between :start_date and :end_date and special=1",
+      groupedSpecialActions = Action.select('sum(cnt) as cnt, avg(cost) as cost, sum(amount) as amount, operations.name, date(actions.created_at), operations.id as id').joins(:operation).group('date(actions.created_at)', 'operations.name', 'operations.id').where("linkedworker_id=:worker_id and actions.created_at between :start_date and :end_date and special=1",
           {worker_id: worker_id, start_date: sdate, end_date: edate}).order('date(actions.created_at)');
       groupedActions.each do |ga|
         info = @dayinfo.select{|info| info['day']==ga.date}.first();
@@ -92,11 +92,12 @@ require 'csv'
           element['cost']=ga.cost;
           element['amount']=ga.amount;
           element['operation_name']=ga.name;
+          element['operation_id']=ga.id;
           element['date']=ga.date.to_s;
           if info['amount'].nil? 
             info['amount'] = ga.amount
           else  
-            info['amount'] = info['amount']+ga.amount;
+            info['amount'] = (info['amount']+ga.amount).round(2);
           end  
           info['detail'] << element;
         end  
@@ -113,11 +114,12 @@ require 'csv'
           element['cost']=ga.cost;
           element['amount']=ga.amount;
           element['operation_name']=ga.name;
+          element['operation_id']=ga.id;
           element['date']=ga.date.to_s;
           if info['amount'].nil? 
             info['amount'] = ga.amount
           else  
-            info['amount'] = info['amount']-ga.amount;
+            info['amount'] = (info['amount']-ga.amount).round(2);
           end  
           info['detail'] << element;
         end  
@@ -128,6 +130,13 @@ require 'csv'
   end  
 
   def showModalWorkerStat
+    getModalWorkerStatData;
+    respond_to do |format|
+      format.js
+    end 
+  end  
+
+  def refreshWorkerStat
     getModalWorkerStatData;
     respond_to do |format|
       format.js
@@ -171,6 +180,13 @@ require 'csv'
       file << pdf
     end
     send_file(save_path.to_s, :type => "application/pdf", :disposition => "attachment");
+  end  
+
+  def showModalEditAction
+    @actions = Action.select("actions.id,cnt,cost,amount, operations.name as op_name,operations.id as op_id").joins(:operation).where("operation_id= :operation_id and worker_id = :worker_id and
+      date_trunc('day',actions.created_at)=:cur_date",{operation_id: params['operation_id'], worker_id: params['worker_id'],
+      cur_date: params['date']})
+
   end  
   
 #  def to_csv(options = {})

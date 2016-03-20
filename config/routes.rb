@@ -17,6 +17,10 @@ Rails.application.routes.draw do
   get 'sprav/printTicket', to: 'sprav#printTicket', as: :sprav_Print
   get 'sprav/printTicket/:id', to: 'sprav#printTicket'
 
+  post 'actions/:id/updateCnt', to: 'actions#updateCnt', as: :updateCnt
+  post 'actions/:id/updateCost', to: 'actions#updateCost', as: :updateCost
+  get 'report/refreshWorkerStat'
+
 
 
   root 'navigate#startPage'
@@ -32,6 +36,7 @@ Rails.application.routes.draw do
   get 'report/getWorkerStatPDF'
   get 'report/stat1'
   get 'report/showModalWorkerStat', as: :modalWorkerStat
+  get 'report/showModalEditAction', as: :modalEditAction
   get '/workers/:id/month/:month', to: 'workers#showstat'
   get '/workers/:id/period/:period', to: 'workers#period'
 #  get 'operation_costs/new', controller: 'operation_costs', action: :new
