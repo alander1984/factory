@@ -11,6 +11,7 @@
       <th class="standard">Имя</th>
       <th class="standard">Отчество</th>
       <th class="standard">Дата рождения</th>
+      <th class="standard">Телефон</th>
       <th class="standard">ПИН</th>
       <th class="standard" colspan="3"></th>
     </tr>
@@ -23,6 +24,7 @@
         <td class="standard"><%= worker.sname %></td>
         <td class="standard"><%= worker.tname %></td>
         <td class="standard"><%= worker.birthday %></td>
+        <td class="standard"><%= worker.phone %></td>
         <td class="standard"><%= worker.pin %></td>
         <td class="standard"><%= link_to 'Открыть', worker %></td>
         <td class="standard"><%= link_to 'Редактировать', edit_worker_path(worker) %></td>

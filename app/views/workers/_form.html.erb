@@ -28,6 +28,10 @@
     <%= f.date_select :birthday, :start_year => 1940, :end_year=>Time.now.year-10 %>
   </div>
   <div class="field">
+    <%= f.label "Телефон" %><br>
+    <%= f.text_field :phone %>
+  </div>
+  <div class="field">
     <%= f.label "ПИН" %><br>
     <%= f.text_field :pin %>
   </div>
