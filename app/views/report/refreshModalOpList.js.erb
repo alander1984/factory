@@ -1,0 +1,4 @@
+$("#opSelect").empty();
+<% @operations.each do |item| %>
+    $('#opSelect').append('<option value="<%= item.id %>"><%= item.name %></option>');
+<% end %>

@@ -1,0 +1,7 @@
+<%= collection_select(:action, :workshop_id, @workshops, :id, :name, options = { prompt: "Выберите цех", hide_label: :true }, html_options = {class: "input-sm form-control", :onchange => "var vals= $(this).serialize(); $.ajax({type: 'GET', url: 'x/updateAddCustomActionInfo/'+this.value, data: vals, dataType: 'script' }).success(function(script){ }); return false;"} ) %>
+
+
+<div class="form-group row" style="margin-left:40px">
+          <label for="operationlbl" class="col-md-1 form-control-label">Операция</label>
+          <%= f.collection_select(:operation_id, @operations, :id, :name, options = { prompt: "Выберите операцию", hide_label: :true }, html_options = {class: "input-sm form-control"} ) %>
+        </div>

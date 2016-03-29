@@ -1,0 +1,68 @@
+
+<%= csrf_meta_tags %>
+<script>
+	
+         $( document ).ready(function()  {
+           $( "#closebtn1" ).click(function( event ) {
+            $("#modal2").modal('hide');
+            $("#editmodal").html("")
+    	   	 });
+           $("#closebtn2").click(function(event) {
+            $("#modal2").modal('hide');
+            $("#editmodal").html("")
+           });
+//           $('#cnteditplace').editable();
+//           $('.my-custom-class').restInPlace()
+        });
+    
+	
+</script>
+
+<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" id="closebtn1">×</button>
+    <h3>Редактирование данных по операции</h3>
+    </div>
+  <div class="modal-body">
+    <div style = "margin-left:15px; margin-right:40px;">
+
+       <table border=1 class="table-bordered table-striped table-condensed cf">
+      <thead>
+        <th>Операция</th>
+        <th>Количество</th>
+        <th>Стоимость</th>
+        <th>Сумма</th>
+      </thead>
+      <tbody>  
+      <% @actions.each do |a| %>
+           <tr>
+              <td><%= a['op_name'] %></td>
+              <td>
+              
+              <%= form_tag(updateCnt_path(:id => a['id']), remote: true)  do |f| %>
+                  <%= text_field_tag(:cnt, a['cnt'],  options = {:size => "5"}) %> 
+                  <button type="submit" class="btn btn-primary" name= "refresh">V</button>
+              <% end %>  
+
+
+              </td>
+              <td>
+                 <%= form_tag(updateCost_path(:id => a['id']), remote: true)  do |f| %>
+                  <%= text_field_tag(:cost, a['cost'],  options = {:size => "5"}) %> 
+                  <button type="submit" class="btn btn-primary" name= "refresh">V</button>
+              <% end %>  
+
+              </td>
+              <td id="action_amount_<%= a['id'] %>"><%= a['amount'] %></td>
+           </tr> 
+      <% end %>
+      </tbody>
+    </table>
+ 
+    </div>
+  </div>
+</div>
+  <div class="modal-footer">
+    <button class="btn btn-default" data-dismiss="modal1" aria-hidden="true" id="closebtn2" >Закрыть</button>
+</div>
+
+
