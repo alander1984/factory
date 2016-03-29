@@ -7,6 +7,11 @@ class ActionsController < ApplicationController
 	
 	end
 
+	def create
+		@action = Action.new;
+		@action.save
+	end
+
 	
 	def updateCnt
 		@action.cnt = params['cnt']
@@ -21,6 +26,12 @@ class ActionsController < ApplicationController
 		@action.save
 	end
 
+	def addCustomAction
+		@action = Action.new(worker_id: params['worker_id'])
+		@operations = Operation.all;
+		@workshops = Workshop.all
+	end
+
 
 	private
 		def set_action
@@ -28,6 +39,6 @@ class ActionsController < ApplicationController
 		end	
 	
 		def action_params 
-			params.require(:action).permit(:cnt,:cost) 
+			params.require(:action).permit(:cnt,:cost,:created_at,:amount,:operation_id) 
 		end
 end	

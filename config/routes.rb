@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :operations
   resources :workers
   resources :workshops
+  get 'actions/addCustomAction', to: 'actions#addCustomAction', as: :addCustomAction
   resources :actions
   resources 'operation_costs'
 
@@ -20,7 +21,8 @@ Rails.application.routes.draw do
   post 'actions/:id/updateCnt', to: 'actions#updateCnt', as: :updateCnt
   post 'actions/:id/updateCost', to: 'actions#updateCost', as: :updateCost
   get 'report/refreshWorkerStat'
-
+  get 'x/updateAddCustomActionInfo/:workshop_id', to: 'report#refreshModalOpList', as: :refreshModalOpList
+  get 'x/updateAddCustomActionInfo', to: 'report#refreshModalOpList'
 
 
   root 'navigate#startPage'

@@ -188,6 +188,16 @@ require 'csv'
       cur_date: params['date']})
 
   end  
+
+  def refreshModalOpList
+    logger.info('here');
+    if !params['workshop_id'].empty?
+      @operations=Operation.where(workshop_id: params['workshop_id'])
+    else
+      @operations=Operation.all;
+    end  
+    @msg="asd"
+  end
   
 #  def to_csv(options = {})
 #    CSV.generate(options) do |csv|
