@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   resources :operations
   resources :workers
   resources :workshops
-  get 'actions/addCustomAction', to: 'actions#addCustomAction', as: :addCustomAction
   resources :actions
+  get 'actions/addCustomAction', to: 'actions#addCustomAction', as: :addCustomAction
   resources 'operation_costs'
 
   get 'sprav/chooseOrg'
@@ -41,6 +41,8 @@ Rails.application.routes.draw do
   get 'report/showModalEditAction', as: :modalEditAction
   get '/workers/:id/month/:month', to: 'workers#showstat'
   get '/workers/:id/period/:period', to: 'workers#period'
+  post 'actions/saveCustomAction', as: :saveCustomAction
+  get 'report/selectWorkerForCustomAction'
 #  get 'operation_costs/new', controller: 'operation_costs', action: :new
       
   # The priority is based upon order of creation: first created -> highest priority.

@@ -92,13 +92,19 @@
 		</table>
 </td>
 <td valign = 'top'>
-    <div  style = "margin-left:40px;">
+    <div  style = "margin-left:40px;margin-bottom:10px">
       <%= form_tag({:action => 'stat1'}, :method => 'GET') do %>
               <%= hidden_field_tag(:sdate1) %>
               <%= hidden_field_tag(:edate1) %>
               <button type="submit" class="btn btn-primary" name= "download">Скачать</button>
-      <% end %>        
+      <% end %>      
+
     </div>  
+    <div style = "margin-left:40px;margin-bottom:40px">
+          <%= link_to "Зарегистрировать дополнительный факт работы", new_action_path, {:class => "btn btn-primary"}%> 
+
+    </div>
+
 </td>
 <table>
 
