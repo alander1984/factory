@@ -1,7 +1,7 @@
 class SpravController < ApplicationController
   
   def getWorkerName(barcode)
-    qstring='isactive=true and (cast(extract(epoch from birthday) as bigint)+31536000*50)*1000+id+pin='+barcode;
+    qstring="isactive=true and ((+31536000*50+cast(extract(epoch from birthday) as bigint))*1000+id+pin="+barcode_id+" or cardcode='"+barcode_id+"')";
     tworker_name='неведомый бродяга, мы не узнали вас в гриме...'
     worklist= Worker.where(qstring);
     if worklist.size>0 
@@ -18,7 +18,7 @@ class SpravController < ApplicationController
       @pin="id"; #Это вставляем для того, чтобы запрос не падал, если пин не ввели
     end
     @workshops = [];
-    qstring='isactive=true and (+31536000*50+cast(extract(epoch from birthday) as bigint))*1000+id+pin='+@barcode_id;
+    qstring="isactive=true and ((+31536000*50+cast(extract(epoch from birthday) as bigint))*1000+id+pin="+@barcode_id+" or cardcode='"+@barcode_id+"')";
     @worker_name='неведомый бродяга, мы не узнали вас в гриме...';
     @worker_found =false;
     begin
@@ -60,7 +60,7 @@ class SpravController < ApplicationController
     @pin=params['pin_input'];
     @barcode_id=params['barcode_input'];
     @workshop_id=params['workshop_id'];
-    qstring='isactive=true and (cast(extract(epoch from birthday) as bigint)+31536000*50)*1000+id+pin='+@barcode_id;
+    qstring="isactive=true and ((+31536000*50+cast(extract(epoch from birthday) as bigint))*1000+id+pin="+@barcode_id+" or cardcode='"+@barcode_id+"')";
     worker_id=-1;
     worklist= Worker.where(qstring);
     if worklist.size>0 

@@ -229,7 +229,7 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def worker_params
-      params.require(:worker).permit(:fname, :sname, :tname, :birthday, :pin, :isactive, :phone)
+      params.require(:worker).permit(:fname, :sname, :tname, :birthday, :pin, :isactive, :phone,:cardcode)
     end
     
       
