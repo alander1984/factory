@@ -35,7 +35,6 @@
   </div>
 </div>
   <div class="modal-footer">
-     <%= link_to "Добавить действие", addCustomAction_url(:worker_id => params['worker_id']), :remote => true, class: "btn btn-warning", :data => {:toggle =>"modal", :target =>'#modal2', :backdrop =>"static"} %>
      <%= link_to "Перечитать данные", report_refreshWorkerStat_url(:sdate => params['sdate'], :edate => params['edate'], :worker_id => params['worker_id']), class: "btn btn-primary", :remote => true %>
      <%= link_to "Скачать", report_getWorkerStatPDF_url(:sdate => params['sdate'], :edate => params['edate'], :worker_id => params['worker_id']), class: "btn btn-primary" %>
     <button class="btn btn-default" data-dismiss="modal" aria-hidden="true" >Закрыть</button>

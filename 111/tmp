@@ -5,3 +5,49 @@
           <label for="operationlbl" class="col-md-1 form-control-label">Операция</label>
           <%= f.collection_select(:operation_id, @operations, :id, :name, options = { prompt: "Выберите операцию", hide_label: :true }, html_options = {class: "input-sm form-control"} ) %>
         </div>
+
+
+         <div style = "margin-left:15px; margin-right:10px;">
+      <div class="form-group row" style="margin-left:10px">
+        <label for="workshoplbl" class="col-md-1 form-control-label">Цех</label>
+        <div class="col-sm-10">
+         <%= select_tag(:workshop_id,options_from_collection_for_select(@workshops, :id, :name),  :include_blank => 'Все', :onchange => "var vals= $(this).serialize(); $.ajax({type: 'GET', url: '../x/updateAddCustomActionInfo/'+this.value, data: vals, dataType: 'script' }).success(function(script){ }); return false;", :class => 'form-control') %>
+        </div>  
+      </div>
+        <!-- Операция -->
+        <div class="form-group row" style="margin-left:10px">
+          <label for="operationlbl" class="col-md-2 form-control-label">Операция</label>
+          <div class="col-sm-9">
+           <%= f.collection_select(:operation_id, @operations, :id, :name, options = { prompt: "Выберите операцию", hide_label: :true }, html_options = {class: "input-sm form-control", id: 'opSelect'} ) %>
+          </div>
+        </div>
+        <!-- /Операция -->
+        <!-- Дата -->
+        <div class="form-group row" style="margin-left:10px">
+          <label for="datalbl" class="col-md-2 form-control-label">Дата</label>
+          <%= hidden_field_tag(:regdate) %>
+          <div class='input-group date  col-sm-9' id='datetimepicker_m1'>
+              <%= f.text_field(:created_at , class: "form-control datepicker", placeholder: "DD/MM/YYYY", onchange: "document.getElementById('regdate').value=this.value") %> 
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+          </div>
+        </div>
+        <!-- /Дата -->
+        <!-- Количества -->
+        <div class="form-group row" style="margin-left:10px">
+          <label for="cntlbl" class="col-sm-2 form-control-label">Количество</label>
+          <div class="col-sm-2">
+            <%= f.text_field :cnt , :class => "form-control" %> 
+          </div>  
+          <label for="costlbl" class="col-sm-1 form-control-label">Цена</label>
+          <div class="col-sm-2">
+            <%= f.text_field(:cost , class: "form-control") %> 
+          </div>  
+          <label for="amountlbl" class="col-sm-2 form-control-label">Стоимость</label>
+          <div class="col-sm-3">
+            <%= f.text_field(:amount , class: "form-control") %> 
+          </div>  
+        </div>
+        <!-- /Количества -->  
+    </div>

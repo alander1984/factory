@@ -1,40 +1,27 @@
-
-<script>
-  
-         $( document ).ready(function()  {
-           $( "#closebtn1" ).click(function( event ) {
-            $("#modal2").modal('hide');
-            $("#editmodal").html("")
-           });
-           $("#closebtn2").click(function(event) {
-            $("#modal2").modal('hide');
-            $("#editmodal").html("")
-           });
-        });
-    
-  
-</script>
+<%= form_tag({:action => 'create'}) do %>
+    <div style="text-align:center">
+ <h2>Добавление внештатного действия</h2>
+ </div>
+ <!--это для нажатия по иконке -->
              <script type="text/javascript">
                  $(function () {
                      $('#datetimepicker_m1').datepicker();
                  });
               </script>
- <!-- TODO тут надо переделать на нормальный form_for, но он почему-то во второй вложенной форме не постит данные -->
-
- <%= form_tag(saveCustomAction_path, remote: true)  do |f| %>
-
-  <div class="modal-header">
-      <button type="button" class="close" id="closebtn1">×</button>
-     <h3>Добавление стороннего действия за сотрудника</h3>
-     </div>
-    <div class="modal-body">
-        <div class="form-group row" style="margin-left:10px">
+              <!--это для нажатия по полю ввода -->
+              <script type="text/javascript">
+                 $(document).ready(function(){
+                     $('.datepicker').datepicker();
+                 });
+              </script>
+         <div style = "margin-left:15px; margin-right:10px;">
+      <div class="form-group row" style="margin-left:10px">
         <label for="workshoplbl" class="col-md-1 form-control-label">Цех</label>
         <div class="col-sm-10">
          <%= select_tag(:workshop_id,options_from_collection_for_select(@workshops, :id, :name),  :include_blank => 'Все', :onchange => "var vals= $(this).serialize(); $.ajax({type: 'GET', url: '../x/updateAddCustomActionInfo/'+this.value, data: vals, dataType: 'script' }).success(function(script){ }); return false;", :class => 'form-control') %>
         </div>  
       </div>
-              <!-- Операция -->
+        <!-- Операция -->
         <div class="form-group row" style="margin-left:10px">
           <label for="operationlbl" class="col-md-2 form-control-label">Операция</label>
           <div class="col-sm-9">
@@ -42,38 +29,41 @@
           </div>
         </div>
         <!-- /Операция -->
-
-<!-- Дата -->
+        <!-- Сотрудник -->
         <div class="form-group row" style="margin-left:10px">
+          <label for="workerlbl" class="col-md-2 form-control-label">Операция</label>
+          <div class="col-sm-3">
+           <%= collection_select("", :worker_id, @workers, :id, :fullname, options = { prompt: "Выберите сотрудника", hide_label: :true }, html_options = {class: "input-sm form-control", id: 'wkSelect'} ) %>
+          </div>
           <label for="datalbl" class="col-md-2 form-control-label">Дата</label>
-          <div class='input-group date  col-sm-9' id='datetimepicker_m1'>
-              <%= text_field_tag(:created_at, "" , options={:class => "form-control datepicker", :placeholder => "DD/MM/YYYY"}) %> 
+          <%= hidden_field_tag(:regdate) %>
+          <div class='input-group date  col-sm-3' id='datetimepicker_m1'>
+              <%= text_field("", :created_at , class: "form-control datepicker", placeholder: "MM/DD/YYYY", onchange: "document.getElementById('regdate').value=this.value") %> 
             <span class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
             </span>
           </div>
         </div>
-        <!-- /Дата -->
-<!-- Количества -->
+        <!-- /Сотрудник -->
+        <!-- Количества -->
         <div class="form-group row" style="margin-left:10px">
           <label for="cntlbl" class="col-sm-2 form-control-label">Количество</label>
           <div class="col-sm-2">
-            <%= text_field_tag(:cnt, "", options = {:class => "form-control"}) %> 
+            <%= text_field "", :cnt , :class => "form-control" %> 
           </div>  
           <label for="costlbl" class="col-sm-1 form-control-label">Цена</label>
           <div class="col-sm-2">
-            <%= text_field_tag(:cost, "", options = {:class => "form-control"}) %> 
+            <%= text_field("", :cost , class: "form-control") %> 
           </div>  
           <label for="amountlbl" class="col-sm-2 form-control-label">Стоимость</label>
-          <div class="col-sm-3">
-            <%= text_field_tag(:amount , "", options = {:class => "form-control"}) %> 
+          <div class="col-sm-2">
+            <%= text_field("", :amount , class: "form-control") %> 
           </div>  
         </div>
         <!-- /Количества -->  
-    <!--</div>-->
-  </div>
-   <div class="modal-footer">
-     <button type="submit" class="btn btn-primary" name= "postAction">V</button>
-     <button class="btn btn-default"  id="closebtn2" >Закрыть</button>
-  </div>
-<% end %>
+    </div>	
+    <div style="text-align:center">
+    	<button type="submit" class="btn btn-primary">Зарегистрировать</button>
+  		<%= link_to "Назад", report_showstat1_path, {:class => "btn btn-default"}%> 
+   	</div> 	
+<%end%>

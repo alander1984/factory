@@ -59,6 +59,7 @@ require 'csv'
   def showstat1
       @sdate = Date.today.beginning_of_month;
       @edate = Date.today.end_of_month;
+      @workers = Worker.all;
       getStat1;
   end  
 
@@ -192,12 +193,13 @@ require 'csv'
   def refreshModalOpList
     logger.info('here');
     if !params['workshop_id'].empty?
-      @operations=Operation.where(workshop_id: params['workshop_id'])
+      @operations= Operation.where('coalesce(special,0)<>1 and workshop_id=:workshop_id',{workshop_id: params['workshop_id']})
     else
-      @operations=Operation.all;
+      @operations= Operation.where('coalesce(special,0)<>1')
     end  
     @msg="asd"
   end
+
   
 #  def to_csv(options = {})
 #    CSV.generate(options) do |csv|
