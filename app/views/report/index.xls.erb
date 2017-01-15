@@ -12,6 +12,8 @@
         <Cell><Data ss:Type="String">Цех</Data></Cell>
         <Cell><Data ss:Type="String">Сотрудник</Data></Cell>
         <Cell><Data ss:Type="String">Количество</Data></Cell>
+        <Cell><Data ss:Type="String">Цена</Data></Cell>
+        <Cell><Data ss:Type="String">Сумма</Data></Cell>
       </Row>
     <% @groupedActions.each do |gAction| %>
       <Row>
@@ -20,6 +22,8 @@
         <Cell><Data ss:Type="String"><%= gAction[0][5] %></Data></Cell>
         <Cell><Data ss:Type="String"><%= "Петров" %></Data></Cell>
         <Cell><Data ss:Type="Number"><%= gAction[1] %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= gAction[0][6] %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= gAction[0][7] %></Data></Cell>
       </Row>
     <% end %>
     </Table>

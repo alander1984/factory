@@ -4,7 +4,7 @@ require 'csv'
   
   def index
     @groupedActions=Action.joins(:operation).joins(:worker).joins(:workshop).
-        group('date(actions.created_at)','operations.id', 'operations.name', 'workers.id', 'workshops.id', 'workshops.name').
+        group('date(actions.created_at)','operations.id', 'operations.name', 'workers.id', 'workshops.id', 'workshops.name', 'actions.cost', 'actions.amount').
      # where("actions.created_at >= :start_date AND actions.created_at <= :end_date",
      #{start_date: params[:start_date], end_date: params[:end_date]}).
     order('date(actions.created_at)').
