@@ -1,7 +1,7 @@
 class SpravController < ApplicationController
   
   def getWorkerName(barcode)
-    qstring="isactive=true and ((+31536000*50+cast(extract(epoch from birthday) as bigint))*1000+id+pin="+barcode_id+" or cardcode='"+barcode_id+"')";
+    qstring="isactive=true and ((+31536000*50+cast(extract(epoch from birthday) as bigint))*1000+id+pin="+barcode+" or cardcode='"+barcode+"')";
     tworker_name='неведомый бродяга, мы не узнали вас в гриме...'
     worklist= Worker.where(qstring);
     if worklist.size>0 
